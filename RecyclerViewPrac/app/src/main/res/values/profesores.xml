@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="profesores">
+        <item>@string/jldiaz</item>
+        <item>@string/arias</item>
+        <item>@string/revuelta</item>
+        <item>@string/ranilla</item>
+        <item>@string/cgutierrez</item>
+        <item>@string/garciadan</item>
+    </string-array>
+</resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Adaptateurs</string>
+    <string name="tituloLista">Liste d\'animaux</string>
+    <string name="mono">Singe</string>
+    <string name="vaca">Vache</string>
+    <string name="perro">Chien</string>
+    <string name="gato">Chat</string>
+    <string name="caballo">Cheval</string>
+    <string name="leon">Lion</string>
+</resources>

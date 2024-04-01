@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="asignaturas">
+        <item>@string/isof</item>
+        <item>@string/pcp</item>
+        <item>@string/imovil</item>
+        <item>@string/inserv</item>
+        <item>@string/inred</item>
+        <item>@string/sisdist</item>
+    </string-array>
+</resources>

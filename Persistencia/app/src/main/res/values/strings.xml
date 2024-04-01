@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Practica Persistencia</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">List Fragment</string>
+    <string name="second_fragment_label">Data Entry</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+
+</resources>

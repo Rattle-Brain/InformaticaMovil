@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Adaptadores</string>
+    <string name="tituloLista">Lista de animales:</string>
+    <string name="mono">Mono</string>
+    <string name="vaca">Vaca</string>
+    <string name="perro">Perro</string>
+    <string name="gato">Gato</string>
+    <string name="caballo">Caballo</string>
+    <string name="leon">León</string>
+</resources>
