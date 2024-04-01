@@ -1,6 +1,6 @@
 # Informatica Movil con Kotlin y AndroidStudio
 
-![Logo de Kotlin](https://cdn.worldvectorlogo.com/logos/kotlin-2.svg)
+![Logo de Kotlin](https://download.logo.wine/logo/Kotlin_(programming_language)/Kotlin_(programming_language)-Logo.wine.png)
 
 ![Logo de Android Studio](images/android_studio_logo.png)
 
