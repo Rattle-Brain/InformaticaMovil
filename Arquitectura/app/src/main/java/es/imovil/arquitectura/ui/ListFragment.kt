@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import es.imovil.arquitectura.CourseApp
 import es.imovil.arquitectura.R
 import es.imovil.arquitectura.adapters.CourseListAdapter
 import es.imovil.arquitectura.databinding.FragmentListBinding

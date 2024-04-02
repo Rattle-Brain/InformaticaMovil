@@ -1,4 +1,4 @@
-package es.imovil.arquitectura
+package es.imovil.arquitectura.ui
 
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
@@ -9,6 +9,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import es.imovil.arquitectura.R
 import es.imovil.arquitectura.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
