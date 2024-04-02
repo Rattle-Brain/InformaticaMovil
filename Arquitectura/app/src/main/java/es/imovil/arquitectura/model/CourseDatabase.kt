@@ -32,7 +32,7 @@ abstract class CourseDatabase: RoomDatabase() {
             INSTANCE = null
         }
 
-        private val CALLBACK = object : RoomDatabase.Callback() {
+        private val CALLBACK = object : Callback() {
             override fun onCreate(db: SupportSQLiteDatabase) {
                 super.onCreate(db)
 
@@ -43,10 +43,29 @@ abstract class CourseDatabase: RoomDatabase() {
                         // Insertar un curso en la base de datos
                         courseDao.insertCourse(
                             Course(
-                                "", "", ""
+                                "Ingenieria Movil", "Arias", "Sufrir a muerte"
                             )
                         )
-
+                        courseDao.insertCourse(
+                            Course(
+                                "Sistemas Distribuidos", "JLDiaz", "Sufrimiento divertido"
+                            )
+                        )
+                        courseDao.insertCourse(
+                            Course(
+                                "Isof", "Fanjul", "Aqui estamos para aprender"
+                            )
+                        )
+                        courseDao.insertCourse(
+                            Course(
+                                "Arquitectura", "De la Calle", "5 años sin aprobarla"
+                            )
+                        )
+                        courseDao.insertCourse(
+                            Course(
+                                "PCP", "Ranilla", "Masterclass de cuñao"
+                            )
+                        )
                         // Realizar otras operaciones con la base de datos si es necesario
                         // Por ejemplo: insertar más datos, actualizar, eliminar, etc.
                     }
