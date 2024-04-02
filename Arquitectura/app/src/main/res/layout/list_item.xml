@@ -6,10 +6,36 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/subjectName"
+        android:id="@+id/courseName"
         android:layout_width="373dp"
         android:layout_height="66dp"
         android:layout_marginTop="28dp"
+        android:padding="16dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.578"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/teacherName"
+        android:layout_width="373dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="128dp"
+        android:padding="16dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.578"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="373dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="228dp"
         android:padding="16dp"
         android:textSize="16sp"
         android:textStyle="bold"
