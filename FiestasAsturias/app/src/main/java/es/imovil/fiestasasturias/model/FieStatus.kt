@@ -1,5 +1,5 @@
 package es.imovil.fiestasasturias.model
 
-data class Fiestatus (
+data class FieStatus (
     val fiestas : Fiestas
 )

@@ -2,7 +2,7 @@ package es.imovil.fiestasasturias.network
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import es.imovil.fiestasasturias.model.Fiestatus
+import es.imovil.fiestasasturias.model.FieStatus
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
@@ -12,7 +12,7 @@ private val IMG_BASE_URL  = "https://www.turismoasturias.es"
 
 interface RestApiService {
     @GET("descargar.php?id=935&tipo=JSON")
-    suspend fun getStatusInfo(): Fiestatus
+    suspend fun getStatusInfo(): FieStatus
 }
 
 private val moshi = Moshi.Builder()
