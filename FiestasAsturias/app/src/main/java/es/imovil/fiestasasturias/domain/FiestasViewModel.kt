@@ -17,10 +17,10 @@ class BusStopsViewModel(val repository: FiestaRepository): ViewModel()
     val stopsUIStateObservable: LiveData<FiestasUIState> get() = _stopsUIStateObservable
 
     init {
-        getBusStopsList()
+        getFiestasList()
     }
 
-    fun getBusStopsList() {
+    fun getFiestasList() {
         viewModelScope.launch {
             repository.updateFieStatusData().map {
                 result ->
