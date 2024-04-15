@@ -1,8 +1,12 @@
 package es.imovil.fiestasasturias.model
 
 import androidx.recyclerview.widget.DiffUtil
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "fiesta_table")
 data class Fiesta (
-    val nombre: String,
+    @PrimaryKey val nombre: String,
     val zona: String,
     val tipo: String,
     val municipio: String,

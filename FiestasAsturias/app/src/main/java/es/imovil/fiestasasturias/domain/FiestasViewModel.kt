@@ -1,0 +1,48 @@
+package es.imovil.fiestasasturias.domain
+
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
+import es.imovil.fiestasasturias.data.ApiResult
+import es.imovil.fiestasasturias.data.FiestaRepository
+import es.imovil.fiestasasturias.ui.FiestasUIState
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
+
+class BusStopsViewModel(val repository: FiestaRepository): ViewModel()
+{
+    private val _stopsUIStateObservable = MutableLiveData<FiestasUIState>()
+    val stopsUIStateObservable: LiveData<FiestasUIState> get() = _stopsUIStateObservable
+
+    init {
+        getBusStopsList()
+    }
+
+    fun getBusStopsList() {
+        viewModelScope.launch {
+            repository.updateFieStatusData().map {
+                result ->
+                when (result) {
+                    is ApiResult.Success -> FiestasUIState.Success(result.data?.fiestas!!)
+                    is ApiResult.Error -> FiestasUIState.Error(result.message!!)
+                    is ApiResult.Loading -> FiestasUIState.Loading()
+                    else -> FiestasUIState.Error("Unknown error")
+                }
+            }.collect {
+                _stopsUIStateObservable.value = it
+            }
+        }
+    }
+
+    class BusStopsViewModelFactory(private val repository: FiestaRepository) : ViewModelProvider.Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(BusStopsViewModel::class.java)) {
+                @Suppress("UNCHECKED_CAST")
+                return BusStopsViewModel(repository) as T
+            }
+            throw IllegalArgumentException("Unknown ViewModel class")
+        }
+    }
+}

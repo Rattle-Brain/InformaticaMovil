@@ -1,5 +1,5 @@
 # Informatica Movil con Kotlin y AndroidStudio
-![Logo de Kotlin](https://developer.android.com/static/images/cluster-illustrations/kotlin-hero.svg)
+<img src="https://developer.android.com/static/images/cluster-illustrations/kotlin-hero.svg" align="right" />
 
 ¡Bienvenido al repositorio de desarrollo en Kotlin para aplicaciones móviles en Android Studio! Este repositorio tiene como objetivo proporcionar recursos y ejemplos de código para ayudarte a desarrollar aplicaciones móviles Android utilizando el lenguaje de programación Kotlin.
 
