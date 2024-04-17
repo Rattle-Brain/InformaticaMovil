@@ -8,21 +8,29 @@
     <fragment
         android:id="@+id/ListFragment"
         android:name="es.imovil.arquitectura.ui.ListFragment"
-        android:label="@string/list_fragment_label"
+        android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_list">
 
         <action
             android:id="@+id/action_ListFragment_to_CourseFragment"
             app:destination="@id/NewCourseFragment" />
+        <action
+            android:id="@+id/action_ListFragment_to_DetailsFragment"
+            app:destination="@id/DetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/NewCourseFragment"
         android:name="es.imovil.arquitectura.ui.NewCourseFragment"
-        android:label="@string/new_corse_fragment_label"
+        android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_new_course">
 
         <action
             android:id="@+id/action_CourseFragment_to_ListFragment"
             app:destination="@id/ListFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/DetailsFragment"
+        android:name="es.imovil.arquitectura.ui.DetailFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_detail" />
 </navigation>

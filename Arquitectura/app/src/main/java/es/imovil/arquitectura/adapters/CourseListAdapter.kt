@@ -2,45 +2,36 @@ package es.imovil.arquitectura.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.asLiveData
 import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import es.imovil.arquitectura.CourseApp
 import es.imovil.arquitectura.databinding.ListItemBinding
 import es.imovil.arquitectura.adapters.CourseListAdapter.CourseViewHolder
+import es.imovil.arquitectura.utils.Utils
 
-class CourseListAdapter : ListAdapter<String, CourseViewHolder>(DIFF_CALLBACK) {
-
+class CourseListAdapter(private val onNameSelected: (String) -> Unit) : ListAdapter<String, CourseViewHolder>(
+    Utils.DIFF_CALLBACK)
+{
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CourseViewHolder {
-        val itemViewBinding = ListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return CourseViewHolder(itemViewBinding)
+        val itemBinding = ListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return CourseViewHolder(itemBinding) { onNameSelected(getItem(it)) }
     }
 
     override fun onBindViewHolder(holder: CourseViewHolder, position: Int) {
-        val courseName = getItem(position)
-        holder.bind(courseName)
+        val nombre = this.getItem(position)
+        holder.bind(nombre)
     }
 
-    companion object DIFF_CALLBACK: DiffUtil.ItemCallback<String>() {
-        override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
-            return oldItem.equals(newItem)
-        }
-        override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
-            return oldItem == newItem
-        }
-    }
 
-    class CourseViewHolder(private val itemBinding: ListItemBinding) : RecyclerView.ViewHolder(itemBinding.root) {
-
-        fun bind(name: String) {
-            val course = CourseApp().repository.getCourseByName(name).asLiveData().value!!
-            with(itemBinding)
-            {
-                courseName.text = name
-                teacherName.text = course.teacher
-                description.text = course.description
+    class CourseViewHolder(private val itemBinding: ListItemBinding, private val onItemClicked: (Int) -> Unit) : RecyclerView.ViewHolder(itemBinding.root)
+    {
+        init {
+            itemBinding.root.setOnClickListener {
+                onItemClicked(adapterPosition)
             }
+        }
+
+        fun bind(nombre: String) {
+            itemBinding.courseName.text = nombre
         }
     }
 }

@@ -8,7 +8,7 @@ import es.imovil.arquitectura.data.CourseRepository
 
 
 
-class CourseViewModel(private val repository: CourseRepository): ViewModel() {
+class CourseViewModel(val repository: CourseRepository): ViewModel() {
     val courseNames: LiveData<List<String>> by lazy {
         repository.getCourseNames().asLiveData()
     }
