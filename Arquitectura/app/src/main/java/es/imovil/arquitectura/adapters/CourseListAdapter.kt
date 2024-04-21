@@ -21,7 +21,6 @@ class CourseListAdapter(private val onNameSelected: (String) -> Unit) : ListAdap
         holder.bind(nombre)
     }
 
-
     class CourseViewHolder(private val itemBinding: ListItemBinding, private val onItemClicked: (Int) -> Unit) : RecyclerView.ViewHolder(itemBinding.root)
     {
         init {
