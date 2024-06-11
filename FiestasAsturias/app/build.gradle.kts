@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    id("kotlin-kapt")
 }
 
 android {
@@ -59,8 +60,22 @@ dependencies {
     //Recyclerview
     implementation ("androidx.recyclerview:recyclerview:1.3.2")
 
-    // Room for Database
-    implementation("androidx.room:room-paging:2.6.1")
+
+    // ViewModel Dependencies
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx")
+
+    // Room Database
+    implementation("androidx.room:room-runtime:2.6.1")
+    annotationProcessor("androidx.room:room-compiler:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+
+    // Coroutines Support
+    implementation("androidx.room:room-ktx:2.6.1")
+
+    // Room Testing
+    testImplementation("androidx.room:room-testing:2.6.1")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

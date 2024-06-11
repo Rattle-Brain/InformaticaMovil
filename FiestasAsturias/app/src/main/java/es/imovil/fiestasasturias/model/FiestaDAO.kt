@@ -9,13 +9,13 @@ import kotlinx.coroutines.flow.Flow
 interface FiestaDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertFiesta(course: Fiesta)
+    suspend fun insertFiesta(fiesta: Fiesta)
 
-    @Query("DELETE FROM fiesta_table WHERE name = :course")
-    suspend fun deleteFiesta(course:String)
+    @Query("DELETE FROM fiesta_table WHERE nombre = :name")
+    suspend fun deleteFiesta(name: String)
 
     @Query("SELECT * FROM fiesta_table WHERE nombre LIKE :name")
-    fun getFiestaByName(name:String):Flow<Fiesta>
+    fun getFiestaByName(name: String):Flow<Fiesta>
 
     @Query("SELECT nombre  FROM fiesta_table")
     fun getNames(): Flow<List<String>>

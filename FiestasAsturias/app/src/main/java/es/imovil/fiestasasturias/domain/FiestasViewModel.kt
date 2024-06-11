@@ -11,10 +11,10 @@ import es.imovil.fiestasasturias.ui.FiestasUIState
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
-class BusStopsViewModel(val repository: FiestaRepository): ViewModel()
+class FiestasViewModel(val repository: FiestaRepository): ViewModel()
 {
     private val _stopsUIStateObservable = MutableLiveData<FiestasUIState>()
-    val stopsUIStateObservable: LiveData<FiestasUIState> get() = _stopsUIStateObservable
+    val fiestasUIStateObservable: LiveData<FiestasUIState> get() = _stopsUIStateObservable
 
     init {
         getFiestasList()
@@ -36,11 +36,11 @@ class BusStopsViewModel(val repository: FiestaRepository): ViewModel()
         }
     }
 
-    class BusStopsViewModelFactory(private val repository: FiestaRepository) : ViewModelProvider.Factory {
+    class FiestasViewModelFactory(private val repository: FiestaRepository) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(BusStopsViewModel::class.java)) {
+            if (modelClass.isAssignableFrom(FiestasViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return BusStopsViewModel(repository) as T
+                return FiestasViewModel(repository) as T
             }
             throw IllegalArgumentException("Unknown ViewModel class")
         }

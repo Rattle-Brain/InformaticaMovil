@@ -1,6 +1,6 @@
 package es.imovil.fiestasasturias.data
 
-import es.imovil.fiestasasturias.model.FieStatus
+import es.imovil.fiestasasturias.model.Fiestas
 import es.imovil.fiestasasturias.network.RestApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 class FiestaRepository{
 
-    fun updateFieStatusData(): Flow<ApiResult<FieStatus>> =
+    fun updateFieStatusData(): Flow<ApiResult<Fiestas>> =
         // Se crea un flujo
         flow {
             // Se realiza la petición al servicio
