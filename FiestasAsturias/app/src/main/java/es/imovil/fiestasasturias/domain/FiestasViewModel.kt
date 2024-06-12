@@ -13,8 +13,8 @@ import kotlinx.coroutines.launch
 
 class FiestasViewModel(val repository: FiestaRepository): ViewModel()
 {
-    private val _stopsUIStateObservable = MutableLiveData<FiestasUIState>()
-    val fiestasUIStateObservable: LiveData<FiestasUIState> get() = _stopsUIStateObservable
+    private val _fiestasUIStateObservable = MutableLiveData<FiestasUIState>()
+    val fiestasUIStateObservable: LiveData<FiestasUIState> get() = _fiestasUIStateObservable
 
     init {
         getFiestasList()
@@ -25,13 +25,13 @@ class FiestasViewModel(val repository: FiestaRepository): ViewModel()
             repository.updateFieStatusData().map {
                 result ->
                 when (result) {
-                    is ApiResult.Success -> FiestasUIState.Success(result.data?.fiestas!!)
+                    is ApiResult.Success -> FiestasUIState.Success(result.data!!)
                     is ApiResult.Error -> FiestasUIState.Error(result.message!!)
                     is ApiResult.Loading -> FiestasUIState.Loading()
                     else -> FiestasUIState.Error("Unknown error")
                 }
             }.collect {
-                _stopsUIStateObservable.value = it
+                _fiestasUIStateObservable.value = it
             }
         }
     }
