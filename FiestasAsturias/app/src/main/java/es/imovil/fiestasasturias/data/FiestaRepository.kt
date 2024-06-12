@@ -15,7 +15,7 @@ class FiestaRepository{
             try {
                 // Respuesta correcta
                 emit(ApiResult.Loading(null))
-                val busStatus = RestApi.retrofitService.getStatusInfo()
+                val busStatus = RestApi.retrofitService.getFiestasInfo()
                 // Se emite el estado Succes y se incluyen los datos recibidos
                 emit(ApiResult.Success(busStatus))
             } catch (e: Exception) {

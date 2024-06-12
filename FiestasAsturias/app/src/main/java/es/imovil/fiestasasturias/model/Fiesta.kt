@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "fiesta_table")
 data class Fiesta (
-    @PrimaryKey val nombre: String,
+@PrimaryKey val nombre: String,
     val zona: String,
     val tipo: String,
     val municipio: String,
@@ -28,14 +28,14 @@ data class Fiesta (
     val slide: String,
     val slideTitulo: String,
     val slideUrl: String
-    ){
-        companion object DIFF_CALLBACK: DiffUtil.ItemCallback<Fiesta>() {
-            override fun areItemsTheSame(oldItem: Fiesta, newItem: Fiesta): Boolean {
-                return oldItem.equals(newItem)
-            }
-
-            override fun areContentsTheSame(oldItem: Fiesta, newItem: Fiesta): Boolean {
-                return oldItem == newItem
-            }
+    )
+{
+    companion object DIFF_CALLBACK: DiffUtil.ItemCallback<Fiesta>() {
+        override fun areItemsTheSame(oldItem: Fiesta, newItem: Fiesta): Boolean {
+            return oldItem.equals(newItem)
         }
+        override fun areContentsTheSame(oldItem: Fiesta, newItem: Fiesta): Boolean {
+            return oldItem == newItem
+        }
+    }
 }
