@@ -16,7 +16,7 @@ class FiestasViewHolder(val binding: FragmentFiestasBinding):
             fNombre.text = f.nombre
             fMunicipio.text = f.municipio
             fLocalidad.text = f.municipio
-            fDesceCorta.text = f.descripcionCorta
+            fDescCorta.text = f.descripcionCorta
         }
 
     }
