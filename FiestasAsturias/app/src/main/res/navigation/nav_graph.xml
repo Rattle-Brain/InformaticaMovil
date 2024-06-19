@@ -1,6 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_graph">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fiestasFragment">
+
+    <fragment
+        android:id="@+id/fiestasFragment"
+        android:name="es.imovil.fiestasasturias.view.FiestasFragment"
+        android:label="FiestasFragment"
+        tools:layout="@layout/fragment_fiestas_list">
+        <action
+            android:id="@+id/action_fiestasFragment_to_detailFragment"
+            app:destination="@id/detailFragment"
+            app:popUpTo="@id/fiestasFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="es.imovil.fiestasasturias.view.DetailFragment"
+        android:label="DetailFragment"
+        tools:layout="@layout/fragment_detail">
+        <argument
+            android:name="fNombre"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_detailFragment_to_mapFragment"
+            app:destination="@id/mapFragment"
+            app:popUpTo="@id/detailFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="es.imovil.fiestasasturias.view.MapFragment"
+        android:label="MapFragment"
+        tools:layout="@layout/fragment_map">
+        <argument
+            android:name="coordenadas"
+            app:argType="es.imovil.fiestasasturias.data.GeoLoc" />
+    </fragment>
+    <argument
+        android:name="latitud"
+        app:argType="long"
+        android:defaultValue="0L" />
+    <argument
+        android:name="longitud"
+        app:argType="long"
+        android:defaultValue="0L" />
 
 </navigation>

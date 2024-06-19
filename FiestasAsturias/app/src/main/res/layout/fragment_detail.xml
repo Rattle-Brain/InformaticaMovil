@@ -53,7 +53,7 @@
                     app:layout_constraintGuide_begin="322dp" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvDetailSlide"
+                    android:id="@+id/rSlideDetails"
                     android:layout_width="390dp"
                     android:layout_height="200dp"
                     android:layout_marginBottom="72dp"
@@ -89,7 +89,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.216"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/rvDetailSlide"
+                    app:layout_constraintTop_toBottomOf="@+id/rSlideDetails"
                     app:layout_constraintVertical_bias="0.094" />
 
                 <TextView
@@ -103,21 +103,21 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.588"
                     app:layout_constraintStart_toEndOf="@+id/fMunicipioDetail"
-                    app:layout_constraintTop_toBottomOf="@+id/rvDetailSlide"
+                    app:layout_constraintTop_toBottomOf="@+id/rSlideDetails"
                     app:layout_constraintVertical_bias="0.094" />
 
-                <ImageView
-                    android:id="@+id/linkCoordinates"
-                    android:layout_width="36dp"
-                    android:layout_height="19dp"
+                <TextView
+                    android:id="@+id/fZona"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
                     android:layout_marginTop="8dp"
-                    android:scaleX="1.35"
-                    android:scaleY="1.35"
+                    android:textAlignment="center"
+                    android:text="Zona"
                     app:layout_constraintBottom_toTopOf="@+id/guideline"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.186"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/rvDetailSlide"
+                    app:layout_constraintTop_toBottomOf="@+id/rSlideDetails"
                     app:layout_constraintVertical_bias="0.773"
                     app:srcCompat="@android:drawable/ic_dialog_map" />
 
@@ -126,7 +126,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="DescTitulo"
+                    android:text="Descripcion"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -139,16 +139,84 @@
                     android:id="@+id/fDescDetail"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:text="Descripción"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/fDescDetailTitulo"
-                    app:layout_constraintHorizontal_bias="0.0" />
+                    app:layout_constraintTop_toBottomOf="@+id/fDescDetailTitulo" />
 
+                <TextView
+                    android:id="@+id/fDiasTitulo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Dias"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.034"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/fDescDetail"
+                    app:layout_constraintVertical_bias="0.250" />
+
+                <TextView
+                    android:id="@+id/fDias"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="Dias"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/fDiasTitulo" />
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvEmail"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="15dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/fDias"
+                    app:layout_constraintVertical_bias="0">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/mapImageView"
+                            android:layout_width="30dp"
+                            android:layout_height="20dp"
+                            android:scaleX="1.35"
+                            android:scaleY="1.35"
+                            app:srcCompat="@android:drawable/ic_dialog_map"
+                            android:contentDescription="Coordinates map pic" />
+
+                        <!-- TextView for the coordinates -->
+                        <TextView
+                            android:id="@+id/fCoordinates"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:text="Latitude, Longitude"
+                            android:textSize="18sp" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>

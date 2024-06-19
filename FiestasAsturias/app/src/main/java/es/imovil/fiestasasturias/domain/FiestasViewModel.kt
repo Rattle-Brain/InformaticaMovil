@@ -14,7 +14,6 @@ import kotlinx.coroutines.launch
 class FiestasViewModel(val repository: FiestaRepository): ViewModel()
 {
     private val _fiestasUIStateObservable = MutableLiveData<FiestasUIState>()
-    val fiestasUIStateObservable: LiveData<FiestasUIState> get() = _fiestasUIStateObservable
 
     init {
         getFiestasList()
@@ -35,14 +34,19 @@ class FiestasViewModel(val repository: FiestaRepository): ViewModel()
             }
         }
     }
+}
 
-    class FiestasViewModelFactory(private val repository: FiestaRepository) : ViewModelProvider.Factory {
+class FiestasViewModelFactory(private val repository: FiestaRepository) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
+
             if (modelClass.isAssignableFrom(FiestasViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
                 return FiestasViewModel(repository) as T
+            } else if (modelClass.isAssignableFrom(FiestasDetailsViewModel::class.java)) {
+                @Suppress("UNCHECKED_CAST")
+                return FiestasDetailsViewModel(repository) as T
             }
+
             throw IllegalArgumentException("Unknown ViewModel class")
         }
-    }
 }

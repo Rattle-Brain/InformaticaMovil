@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    id("androidx.navigation.safeargs.kotlin")
     id("kotlin-kapt")
 }
 
@@ -72,7 +73,6 @@ dependencies {
     implementation("androidx.room:room-runtime:2.6.1")
     implementation(libs.androidx.legacy.support.v4)
     annotationProcessor("androidx.room:room-compiler:2.6.1")
-    kapt("androidx.room:room-compiler:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
 
     // Coroutines Support
@@ -87,7 +87,9 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx")
-    implementation("androidx.recyclerview:recyclerview:1.3.2")
+
+    // osmdroid
+    implementation("org.osmdroid:osmdroid-android:6.1.11")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
