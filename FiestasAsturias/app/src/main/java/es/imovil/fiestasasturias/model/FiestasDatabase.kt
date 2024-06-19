@@ -18,19 +18,18 @@ abstract class FiestasDatabase: RoomDatabase(){
     companion object {
         private var INSTANCE: FiestasDatabase? = null
 
-        fun getInstance(context: Context): FiestasDatabase? {
-            if (INSTANCE == null) {
-                synchronized(FiestasDatabase::class) {
-                    INSTANCE = Room.databaseBuilder(
-                        context.applicationContext,
-                        FiestasDatabase::class.java,
-                        "fiestas.db"
-                    )
-                        .addCallback(CALLBACK)
-                        .build()
-                }
+        fun getInstance(context: Context): FiestasDatabase {
+            return INSTANCE ?: synchronized(this) {
+                val instance = Room.databaseBuilder(
+                    context.applicationContext,
+                    FiestasDatabase::class.java,
+                    "fiestas.db"
+                )
+                    .addCallback(CALLBACK)
+                    .build()
+                INSTANCE = instance
+                instance
             }
-            return INSTANCE!!
         }
 
         fun destroy() {

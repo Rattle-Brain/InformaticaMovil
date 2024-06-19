@@ -2,10 +2,10 @@ package es.imovil.fiestasasturias.adapter
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import es.imovil.fiestasasturias.databinding.FragmentFiestasBinding
+import es.imovil.fiestasasturias.databinding.FiestaViewBinding
 import es.imovil.fiestasasturias.model.Fiesta
 
-class FiestasViewHolder(val binding: FragmentFiestasBinding):
+class FiestasViewHolder(val binding: FiestaViewBinding):
     RecyclerView.ViewHolder(binding.root), View.OnClickListener {
     override fun onClick(v: View?) {
         TODO("Not yet implemented")
