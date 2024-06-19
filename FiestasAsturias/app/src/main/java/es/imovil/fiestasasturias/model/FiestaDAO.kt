@@ -19,4 +19,7 @@ interface FiestaDAO {
 
     @Query("SELECT nombre  FROM fiesta_table")
     fun getNames(): Flow<List<String>>
+
+    @Query("DELETE FROM fiesta_table where 1=1")
+    suspend fun deleteAllFiestas()
 }

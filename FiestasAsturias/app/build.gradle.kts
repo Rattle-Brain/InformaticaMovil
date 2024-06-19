@@ -92,6 +92,9 @@ dependencies {
     // osmdroid
     implementation("org.osmdroid:osmdroid-android:6.1.11")
 
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
+
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

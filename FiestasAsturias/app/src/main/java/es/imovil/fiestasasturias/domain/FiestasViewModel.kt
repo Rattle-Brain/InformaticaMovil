@@ -1,6 +1,5 @@
 package es.imovil.fiestasasturias.domain
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -21,7 +20,7 @@ class FiestasViewModel(val repository: FiestaRepository): ViewModel()
 
     fun getFiestasList() {
         viewModelScope.launch {
-            repository.updateFieStatusData().map {
+            repository.updateFiestasInfo().map {
                 result ->
                 when (result) {
                     is ApiResult.Success -> FiestasUIState.Success(result.data!!)

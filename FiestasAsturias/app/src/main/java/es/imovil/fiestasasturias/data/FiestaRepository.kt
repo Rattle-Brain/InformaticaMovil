@@ -2,11 +2,9 @@ package es.imovil.fiestasasturias.data
 
 import es.imovil.fiestasasturias.model.Fiesta
 import es.imovil.fiestasasturias.model.FiestaDAO
-import es.imovil.fiestasasturias.model.Fiestas
 import es.imovil.fiestasasturias.network.RestApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
@@ -14,6 +12,7 @@ import kotlinx.coroutines.launch
 class FiestaRepository(private val fiestaDAO: FiestaDAO){
 
     fun getFiestaByName(nombreFiesta: String) = fiestaDAO.getFiestaByName(nombreFiesta)
+
     suspend fun deleteFiesta(nombreFiesta: String) {
         CoroutineScope(Dispatchers.IO).launch {
             fiestaDAO.deleteFiesta(nombreFiesta)
@@ -24,23 +23,31 @@ class FiestaRepository(private val fiestaDAO: FiestaDAO){
             fiestaDAO.insertFiesta(fiesta)
         }
     }
-    fun updateFieStatusData(): Flow<ApiResult<Fiestas>> =
+
+    suspend fun deleteFiestas() {
+        CoroutineScope(Dispatchers.IO).launch {
+            fiestaDAO.deleteAllFiestas()
+        }
+    }
+
+    fun updateFiestasInfo() =
         // Se crea un flujo
         flow {
             // Se realiza la petición al servicio
             try {
-                // Respuesta correcta
-                emit(ApiResult.Loading(null))
-                val busStatus = RestApi.retrofitService.getFiestasInfo()
-                // Se emite el estado Succes y se incluyen los datos recibidos
-                emit(ApiResult.Success(busStatus))
+                val fiestas = RestApi.retrofitService.getFiestasFromLink()
+
+                deleteFiestas()
+
+                fiestas.fiestas.map { insertFiesta(it) }
+
+                emit(ApiResult.Success(fiestas))
+
             } catch (e: Exception) {
-                // Error en la red
-                // Se emite el estado de Error con el mensaje que lo explica
-                emit(ApiResult.Error(e.toString()))
+                emit(ApiResult.Error("Error en el acceso a la API"))
             }
+
             // El flujo se ejecuta en el hilo I/O
         }.flowOn(Dispatchers.IO)
-
 
 }

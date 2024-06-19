@@ -42,7 +42,7 @@ abstract class FiestasDatabase: RoomDatabase(){
                 CoroutineScope(Dispatchers.IO).launch {
                     // We try to obtain the list
                     try {
-                        val fiestas = RestApi.retrofitService.getFiestasInfo()
+                        val fiestas = RestApi.retrofitService.getFiestasFromLink()
                         fiestas.fiestas.map { INSTANCE!!.dao().insertFiesta(it) }
 
                     // If it fails we show a toast indicating so
