@@ -13,7 +13,10 @@ import kotlinx.coroutines.launch
 class FiestasViewModel(val repository: FiestaRepository): ViewModel()
 {
     private val _fiestasUIStateObservable = MutableLiveData<FiestasUIState>()
+    val query = MutableLiveData<String>()
 
+
+    // Inicializacion del viewmodel
     init {
         getFiestasList()
     }

@@ -1,17 +1,26 @@
 package es.imovil.fiestasasturias.data
 
+import androidx.annotation.OptIn
+import androidx.datastore.core.DataStore
+import androidx.media3.common.util.Log
+import androidx.media3.common.util.UnstableApi
 import es.imovil.fiestasasturias.model.Fiesta
 import es.imovil.fiestasasturias.model.FiestaDAO
 import es.imovil.fiestasasturias.network.RestApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
+import java.util.prefs.Preferences
+
+private const val TAG = "REPOSITORY-DEBUG"
 
 class FiestaRepository(private val fiestaDAO: FiestaDAO){
 
     fun getFiestaByName(nombreFiesta: String) = fiestaDAO.getFiestaByName(nombreFiesta)
+    fun getFiestas() = fiestaDAO.getFiestas()
 
     suspend fun deleteFiesta(nombreFiesta: String) {
         CoroutineScope(Dispatchers.IO).launch {
@@ -30,14 +39,12 @@ class FiestaRepository(private val fiestaDAO: FiestaDAO){
         }
     }
 
+
     fun updateFiestasInfo() =
-        // Se crea un flujo
+
         flow {
-            // Se realiza la petición al servicio
             try {
                 val fiestas = RestApi.retrofitService.getFiestasFromLink()
-
-                deleteFiestas()
 
                 fiestas.fiestas.map { insertFiesta(it) }
 
@@ -46,8 +53,6 @@ class FiestaRepository(private val fiestaDAO: FiestaDAO){
             } catch (e: Exception) {
                 emit(ApiResult.Error("Error en el acceso a la API"))
             }
-
-            // El flujo se ejecuta en el hilo I/O
         }.flowOn(Dispatchers.IO)
 
 }

@@ -72,6 +72,8 @@ dependencies {
     // Room Database
     implementation("androidx.room:room-runtime:2.6.1")
     implementation(libs.androidx.legacy.support.v4)
+    implementation(libs.androidx.datastore.core.android)
+    implementation(libs.androidx.media3.common)
     annotationProcessor("androidx.room:room-compiler:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
     kapt("androidx.room:room-compiler:2.6.1")

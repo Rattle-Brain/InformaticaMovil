@@ -14,6 +14,8 @@ interface FiestaDAO {
     @Query("DELETE FROM fiesta_table WHERE nombre = :name")
     suspend fun deleteFiesta(name: String)
 
+    @Query("SELECT * FROM fiesta_table")
+    fun getFiestas(): Flow<List<Fiesta>>
     @Query("SELECT * FROM fiesta_table WHERE nombre LIKE :name")
     fun getFiestaByName(name: String):Flow<Fiesta>
 

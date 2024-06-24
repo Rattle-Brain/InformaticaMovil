@@ -4,4 +4,8 @@
         <domain includeSubdomains="true">orion.edv.uniovi.es</domain>
         <domain includeSubdomains="true">openptmap.org</domain>
     </domain-config>
+
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">192.168.8.102</domain>
+    </domain-config>
 </network-security-config>

@@ -12,7 +12,7 @@ import es.imovil.fiestasasturias.model.Fiesta
 class FiestasDetailsViewModel(fiestaRepo: FiestaRepository): ViewModel() {
 
     private val nombreFiesta = MutableLiveData<String>()
-    // Usamos el nombre como trigger para
+
     val location: LiveData<Fiesta> = nombreFiesta.switchMap {
             name -> fiestaRepo.getFiestaByName(name).asLiveData()
     }

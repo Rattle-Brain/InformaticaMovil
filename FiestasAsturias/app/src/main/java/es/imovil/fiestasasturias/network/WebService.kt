@@ -8,13 +8,16 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Response
 import java.util.concurrent.TimeUnit
 
 private val JSON_BASE_URL = "http://orion.edv.uniovi.es/"
+private val HOME_URL = "http://192.168.8.102"
 private val IMG_BASE_URL  = "https://www.turismoasturias.es"
 
 interface RestApiService {
-    @GET("~arias/json/FiestasDeInteres.json")
+    @GET("FiestasDeInteres.json")
+
     suspend fun getFiestasFromLink(): Fiestas
 }
 
@@ -35,7 +38,7 @@ val client = OkHttpClient.Builder()
 
 private val retrofit = Retrofit.Builder()
     .addConverterFactory(MoshiConverterFactory.create(moshi))
-    .baseUrl(JSON_BASE_URL)
+    .baseUrl(HOME_URL)
     .client(client)
     .build()
 
