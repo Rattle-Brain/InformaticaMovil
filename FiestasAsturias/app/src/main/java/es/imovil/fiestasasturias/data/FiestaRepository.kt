@@ -9,10 +9,14 @@ import es.imovil.fiestasasturias.model.FiestaDAO
 import es.imovil.fiestasasturias.network.RestApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import java.io.IOException
 import java.util.prefs.Preferences
 
 private const val TAG = "REPOSITORY-DEBUG"
@@ -39,20 +43,20 @@ class FiestaRepository(private val fiestaDAO: FiestaDAO){
         }
     }
 
-
     fun updateFiestasInfo() =
 
         flow {
             try {
-                val fiestas = RestApi.retrofitService.getFiestasFromLink()
+                val items = RestApi.retrofitService.getFiestasFromLink()
 
-                fiestas.fiestas.map { insertFiesta(it) }
+                deleteFiestas()
 
-                emit(ApiResult.Success(fiestas))
+                items.fiestas.map { insertFiesta(it) }
+
+                emit(ApiResult.Success(items))
 
             } catch (e: Exception) {
                 emit(ApiResult.Error("Error en el acceso a la API"))
             }
         }.flowOn(Dispatchers.IO)
-
 }

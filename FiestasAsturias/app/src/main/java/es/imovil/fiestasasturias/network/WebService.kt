@@ -11,13 +11,12 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
 import java.util.concurrent.TimeUnit
 
-private val JSON_BASE_URL = "http://orion.edv.uniovi.es/"
-private val HOME_URL = "http://192.168.8.102"
+private val JSON_BASE_URL = "http://orion.edv.uniovi.es/~arias/json/"
+private val HOME_URL = "http://192.168.8.102/"
 private val IMG_BASE_URL  = "https://www.turismoasturias.es"
 
 interface RestApiService {
     @GET("FiestasDeInteres.json")
-
     suspend fun getFiestasFromLink(): Fiestas
 }
 

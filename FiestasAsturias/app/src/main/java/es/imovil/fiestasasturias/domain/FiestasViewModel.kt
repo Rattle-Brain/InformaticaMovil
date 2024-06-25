@@ -26,6 +26,7 @@ class FiestasViewModel(val repository: FiestaRepository): ViewModel()
             repository.updateFiestasInfo().map {
                 result ->
                 when (result) {
+
                     is ApiResult.Success -> FiestasUIState.Success(result.data!!)
                     is ApiResult.Error -> FiestasUIState.Error(result.message!!)
                     is ApiResult.Loading -> FiestasUIState.Loading()
@@ -36,6 +37,8 @@ class FiestasViewModel(val repository: FiestaRepository): ViewModel()
             }
         }
     }
+
+
 }
 
 class FiestasViewModelFactory(private val repository: FiestaRepository) : ViewModelProvider.Factory {

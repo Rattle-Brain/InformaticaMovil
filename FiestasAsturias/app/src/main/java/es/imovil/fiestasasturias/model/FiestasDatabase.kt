@@ -20,15 +20,14 @@ abstract class FiestasDatabase: RoomDatabase(){
 
         fun getInstance(context: Context): FiestasDatabase {
             return INSTANCE ?: synchronized(this) {
-                val instance = Room.databaseBuilder(
+                INSTANCE = Room.databaseBuilder(
                     context.applicationContext,
                     FiestasDatabase::class.java,
                     "fiestas.db"
                 )
                     .addCallback(CALLBACK)
                     .build()
-                INSTANCE = instance
-                instance
+                return INSTANCE!!
             }
         }
 
@@ -42,8 +41,34 @@ abstract class FiestasDatabase: RoomDatabase(){
                 CoroutineScope(Dispatchers.IO).launch {
                     // We try to obtain the list
                     try {
+
                         val fiestas = RestApi.retrofitService.getFiestasFromLink()
                         fiestas.fiestas.map { INSTANCE!!.dao().insertFiesta(it) }
+
+                        INSTANCE!!.dao().insertFiesta(
+                            Fiesta("Ejemplo",
+                                "Ejemplo",
+                                "Ejemplo",
+                                "Ejemplo",
+                                "Ejemplo",
+                                "Ejemplo",
+                                "Ejemplo",
+                                "Ejemplo",
+                                "Ejemplo",
+                                "Ejemplo",
+                                "Ejemplo",
+                                "Ejemplo",
+                                "Ejemplo",
+                                "Ejemplo",
+                                "Ejemplo",
+                                "Ejemplo",
+                                "Ejemplo",
+                                "Ejemplo",
+                                "Ejemplo",
+                                "Ejemplo",
+                                "Ejemplo",
+                                "Ejemplo")
+                        )
 
                     // If it fails we show a toast indicating so
                     } catch (_: Exception) {

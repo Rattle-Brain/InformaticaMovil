@@ -14,11 +14,13 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import es.imovil.fiestasasturias.App
 import es.imovil.fiestasasturias.R
 import es.imovil.fiestasasturias.adapter.FiestasAdapter
+import es.imovil.fiestasasturias.controller.ClickListenerController
 import es.imovil.fiestasasturias.databinding.FragmentFiestasListBinding
 import es.imovil.fiestasasturias.domain.FiestasViewModel
 import es.imovil.fiestasasturias.domain.FiestasViewModelFactory
 
-class FiestasListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
+class FiestasListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener,
+    ClickListenerController{
 
     private var _binding: FragmentFiestasListBinding? = null
     private val binding get() = _binding!!
@@ -53,7 +55,7 @@ class FiestasListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         rvFiestas = binding.fiestasList
         rvFiestas.layoutManager = LinearLayoutManager(this.context)
 
-        fAdapter = FiestasAdapter()
+        fAdapter = FiestasAdapter(this)
         rvFiestas.adapter = fAdapter
         rvFiestas.setHasFixedSize(true)
 
@@ -65,5 +67,10 @@ class FiestasListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     override fun onRefresh() {
         fiestasVM.getFiestasList()
     }
+
+    override fun onItemClick(position: Int) {
+        TODO("Not yet implemented")
+    }
+
 
 }
