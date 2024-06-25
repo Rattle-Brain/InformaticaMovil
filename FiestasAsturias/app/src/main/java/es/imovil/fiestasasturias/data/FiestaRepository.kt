@@ -47,9 +47,9 @@ class FiestaRepository(private val fiestaDAO: FiestaDAO){
 
         flow {
             try {
-                val items = RestApi.retrofitService.getFiestasFromLink()
-
                 deleteFiestas()
+
+                val items = RestApi.retrofitService.getFiestasFromLink()
 
                 items.fiestas.map { insertFiesta(it) }
 

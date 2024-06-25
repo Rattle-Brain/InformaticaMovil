@@ -23,6 +23,7 @@ interface RestApiService {
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
     .build()
+
 // Logging interceptor
 val logging = HttpLoggingInterceptor().apply {
     level = HttpLoggingInterceptor.Level.BODY

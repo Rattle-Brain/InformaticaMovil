@@ -11,6 +11,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.google.android.material.snackbar.Snackbar
 import es.imovil.fiestasasturias.App
 import es.imovil.fiestasasturias.R
 import es.imovil.fiestasasturias.adapter.FiestasAdapter
@@ -18,12 +19,13 @@ import es.imovil.fiestasasturias.controller.ClickListenerController
 import es.imovil.fiestasasturias.databinding.FragmentFiestasListBinding
 import es.imovil.fiestasasturias.domain.FiestasViewModel
 import es.imovil.fiestasasturias.domain.FiestasViewModelFactory
+import es.imovil.fiestasasturias.ui.FiestasUIState
 
 class FiestasListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener,
     ClickListenerController{
 
     private var _binding: FragmentFiestasListBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentFiestasListBinding
     private lateinit var mainFargment: NavHostFragment
     private lateinit var navController: NavController
 
@@ -37,8 +39,27 @@ class FiestasListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener,
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        binding = FragmentFiestasListBinding.inflate(layoutInflater)
         mainFargment = requireActivity().supportFragmentManager.findFragmentById(R.id.mainNavFragment) as NavHostFragment
         navController = mainFargment.navController
+
+        fiestasVM.fiestasUIStateObservable.observe(this) { result ->
+            when (result) {
+                is FiestasUIState.Success -> {
+                    fAdapter.submitList(result.fiestas.fiestas)
+                    binding.swipeRefreshLayout.isRefreshing = false
+                }
+                is FiestasUIState.Error -> {
+                    Snackbar.make(binding.root, result.message, Snackbar.LENGTH_SHORT).show()
+                    binding.swipeRefreshLayout.isRefreshing = false
+                }
+                is FiestasUIState.Loading -> binding.swipeRefreshLayout.isRefreshing = true
+            }
+        }
+        //binding.swipeRefreshLayout.setOnRefreshListener(refreshListener)
+
+
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
