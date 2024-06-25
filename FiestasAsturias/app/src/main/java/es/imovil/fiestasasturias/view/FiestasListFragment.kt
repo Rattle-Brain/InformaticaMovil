@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -90,7 +91,11 @@ class FiestasListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener,
     }
 
     override fun onItemClick(position: Int) {
-        TODO("Not yet implemented")
+        val nombreFiesta: String = fiestasVM.fiestasFiltradas.value?.get(position)?.nombre ?: ""
+        if (nombreFiesta == "") return
+        findNavController().navigate(
+            FiestasListFragmentDirections.actionFiestasFragmentToDetailFragment(nombreFiesta)
+        )
     }
 
 

@@ -26,6 +26,8 @@ class FiestaRepository(private val fiestaDAO: FiestaDAO){
     fun getFiestaByName(nombreFiesta: String) = fiestaDAO.getFiestaByName(nombreFiesta)
     fun getFiestas() = fiestaDAO.getFiestas()
 
+    fun getFiestasListByName(input: String) = fiestaDAO.getFiestasListByName(input)
+
     suspend fun deleteFiesta(nombreFiesta: String) {
         CoroutineScope(Dispatchers.IO).launch {
             fiestaDAO.deleteFiesta(nombreFiesta)
@@ -56,6 +58,7 @@ class FiestaRepository(private val fiestaDAO: FiestaDAO){
                 emit(ApiResult.Success(items))
 
             } catch (e: Exception) {
+                e.printStackTrace()
                 emit(ApiResult.Error("Error en el acceso a la API"))
             }
         }.flowOn(Dispatchers.IO)
