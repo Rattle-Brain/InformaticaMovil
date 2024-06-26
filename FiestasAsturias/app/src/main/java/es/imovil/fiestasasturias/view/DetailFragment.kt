@@ -11,6 +11,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import es.imovil.fiestasasturias.App
+import es.imovil.fiestasasturias.adapter.ImgSliderAdapter
 import es.imovil.fiestasasturias.data.GeoLoc
 import es.imovil.fiestasasturias.databinding.FragmentDetailBinding
 import es.imovil.fiestasasturias.domain.FiestasDetailsViewModel
@@ -85,6 +86,16 @@ class DetailFragment: Fragment() {
                     )
                      */
                 }
+
+                val slides: List<String> = f.slide.split(",")
+                val title = f.slideTitulo
+
+                rvSlide = rSlideDetails
+
+                rvSlide.layoutManager = LinearLayoutManager(context,
+                    androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL,false);
+
+                rvSlide.adapter = ImgSliderAdapter(slides, title)
             }
         }
 

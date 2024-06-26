@@ -21,7 +21,7 @@ class FiestasViewHolder(val binding: FiestaViewBinding, private val clickListene
         with(binding) {
             fNombre.text = f.nombre
             fMunicipio.text = f.municipio
-            fLocalidad.text = f.municipio
+            fLocalidad.text = f.localidad
             fDescCorta.text = f.descripcionCorta
 
             Picasso
