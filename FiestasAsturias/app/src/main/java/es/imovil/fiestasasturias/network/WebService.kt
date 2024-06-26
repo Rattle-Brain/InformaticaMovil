@@ -38,7 +38,7 @@ val client = OkHttpClient.Builder()
 
 private val retrofit = Retrofit.Builder()
     .addConverterFactory(MoshiConverterFactory.create(moshi))
-    .baseUrl(HOME_URL)
+    .baseUrl(JSON_BASE_URL)
     .client(client)
     .build()
 

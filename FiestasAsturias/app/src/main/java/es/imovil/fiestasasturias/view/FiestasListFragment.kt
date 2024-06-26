@@ -22,30 +22,57 @@ import es.imovil.fiestasasturias.domain.FiestasViewModel
 import es.imovil.fiestasasturias.domain.FiestasViewModelFactory
 import es.imovil.fiestasasturias.ui.FiestasUIState
 
-class FiestasListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener,
-    ClickListenerController{
+class FiestasListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener, ClickListenerController {
 
     private var _binding: FragmentFiestasListBinding? = null
-    private lateinit var binding: FragmentFiestasListBinding
-    private lateinit var mainFargment: NavHostFragment
-    private lateinit var navController: NavController
-
-    private lateinit var rvFiestas: RecyclerView
-    lateinit var srLayout: SwipeRefreshLayout
-    private lateinit var fAdapter: FiestasAdapter
+    private val binding get() = _binding!!
 
     private val fiestasVM: FiestasViewModel by viewModels {
-        FiestasViewModelFactory((activity?.application as App).fiestaRepo)
+        FiestasViewModelFactory((requireActivity().application as App).fiestaRepo)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    private lateinit var fAdapter: FiestasAdapter
 
-        binding = FragmentFiestasListBinding.inflate(layoutInflater)
-        mainFargment = requireActivity().supportFragmentManager.findFragmentById(R.id.mainNavFragment) as NavHostFragment
-        navController = mainFargment.navController
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentFiestasListBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
-        fiestasVM.fiestasUIStateObservable.observe(this) { result ->
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setupRecyclerView()
+        setupSwipeRefreshLayout()
+        observeViewModel()
+
+        binding.swipeRefreshLayout.setOnRefreshListener(this)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun setupRecyclerView() {
+        binding.fiestasList.apply {
+            layoutManager = LinearLayoutManager(context)
+            fAdapter = FiestasAdapter(this@FiestasListFragment)
+            adapter = fAdapter
+            setHasFixedSize(true)
+        }
+    }
+
+    private fun setupSwipeRefreshLayout() {
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            fiestasVM.getFiestasList()
+        }
+    }
+
+    private fun observeViewModel() {
+        fiestasVM.fiestasUIStateObservable.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is FiestasUIState.Success -> {
                     fAdapter.submitList(result.fiestas.fiestas)
@@ -58,32 +85,10 @@ class FiestasListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener,
                 is FiestasUIState.Loading -> binding.swipeRefreshLayout.isRefreshing = true
             }
         }
-        //binding.swipeRefreshLayout.setOnRefreshListener(refreshListener)
 
-
-    }
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-
-        _binding = FragmentFiestasListBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        rvFiestas = binding.fiestasList
-        rvFiestas.layoutManager = LinearLayoutManager(this.context)
-
-        fAdapter = FiestasAdapter(this)
-        rvFiestas.adapter = fAdapter
-        rvFiestas.setHasFixedSize(true)
-
-        
-        srLayout = binding.swipeRefreshLayout
-        srLayout.setOnRefreshListener(this)
+        fiestasVM.fiestasFiltradas.observe(viewLifecycleOwner) { fiestasFiltradasList ->
+            fAdapter.submitList(fiestasFiltradasList)
+        }
     }
 
     override fun onRefresh() {
@@ -91,12 +96,9 @@ class FiestasListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener,
     }
 
     override fun onItemClick(position: Int) {
-        val nombreFiesta: String = fiestasVM.fiestasFiltradas.value?.get(position)?.nombre ?: ""
-        if (nombreFiesta == "") return
+        val nombreFiesta = fiestasVM.fiestasFiltradas.value?.get(position)?.nombre ?: return
         findNavController().navigate(
             FiestasListFragmentDirections.actionFiestasFragmentToDetailFragment(nombreFiesta)
         )
     }
-
-
 }

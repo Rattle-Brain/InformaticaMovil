@@ -1,5 +1,6 @@
 package es.imovil.fiestasasturias.domain
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
@@ -23,16 +24,23 @@ class FiestasViewModel(val repository: FiestaRepository): ViewModel()
     val query = MutableLiveData<String>()
     val fiestasFiltradas: MediatorLiveData<List<Fiesta>> = MediatorLiveData()
 
-    private val fiestasNames: LiveData<List<Fiesta>> = query.switchMap {
-        repository.getFiestas().asLiveData()
+    private val fiestasNames: LiveData<List<Fiesta>> = query.switchMap {query ->
+        val temp: List<String> = query.chunked(1)
+        val exclude: List<String> = listOf("a","e","i","o","u","á","é","í","ó","ú")
+        var name = ""
+        for (c in temp) {
+            name += if(exclude.contains(c)) "_"
+            else c
+        }
+
+        repository.getFiestasListByName(name).asLiveData()
     }
 
 
 
     // Inicializacion del viewmodel
     init {
-
-       query.value = ""
+        query.value = ""
 
         fiestasFiltradas.addSource(fiestasNames) { list ->
             fiestasFiltradas.value = list

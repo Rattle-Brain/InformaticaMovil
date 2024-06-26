@@ -13,8 +13,8 @@ class FiestasDetailsViewModel(fiestaRepo: FiestaRepository): ViewModel() {
 
     private val nombreFiesta = MutableLiveData<String>()
 
-    val location: LiveData<Fiesta> = nombreFiesta.switchMap {
-            name -> fiestaRepo.getFiestaByName(name).asLiveData()
+    val fiesta: LiveData<Fiesta> = nombreFiesta.switchMap {
+            nombre -> fiestaRepo.getFiestaByName(nombre).asLiveData()
     }
 
     // MÉTODOS

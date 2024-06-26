@@ -4,11 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import es.imovil.fiestasasturias.App
+import es.imovil.fiestasasturias.data.GeoLoc
 import es.imovil.fiestasasturias.databinding.FragmentDetailBinding
 import es.imovil.fiestasasturias.domain.FiestasDetailsViewModel
 import es.imovil.fiestasasturias.domain.FiestasViewModelFactory
@@ -26,6 +29,8 @@ class DetailFragment: Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var rvSlide: RecyclerView
+
+    private lateinit var geoloc: GeoLoc
 
     private val detailVM: FiestasDetailsViewModel by viewModels() {
         FiestasViewModelFactory((activity?.application as App).fiestaRepo)
@@ -48,6 +53,41 @@ class DetailFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         detailVM.setFiesta(fiestaNombre)
+
+        bindFiestaDetails()
+    }
+
+    fun bindFiestaDetails(){
+        detailVM.fiesta.observe(viewLifecycleOwner) { f ->
+            with(binding) {
+
+                fNombreDetail.text = f.nombre
+                fLocalidadDetail.text = f.localidad
+                fMunicipioDetail.text = f.municipio
+                fDescDetail.text = f.descripcion
+                fZona.text = f.zona
+                fDias.text = f.dias
+
+                try {
+                    val cords: List<String> = f.coordenadas.split(",")
+                    geoloc = GeoLoc(f.nombre,cords[0].toDouble(), cords[1].toDouble())
+                    fCoordinates.text = f.coordenadas
+                } catch (_: Exception) {
+                    fCoordinates.isVisible = false
+                }
+
+                fCoordinates.setOnClickListener {
+                    /*
+                    findNavController().navigate(
+                        es.imovil.fiestasasturias.view.FiestasListFragmentDirections.(
+                            locationCoordinates
+                        )
+                    )
+                     */
+                }
+            }
+        }
+
     }
 }
 
