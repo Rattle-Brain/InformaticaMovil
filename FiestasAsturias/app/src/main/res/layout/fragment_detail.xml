@@ -16,10 +16,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <!--
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content" /-->
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -50,7 +51,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_begin="322dp" />
+                    app:layout_constraintGuide_begin="355dp" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rSlideDetails"
@@ -59,9 +60,10 @@
                     android:layout_marginBottom="72dp"
                     app:layout_constraintBottom_toTopOf="@+id/guideline"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.476"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/fNombreDetail"
-                    app:layout_constraintVertical_bias="0.30"
+                    app:layout_constraintVertical_bias="0.533"
                     tools:layout="@layout/img_slide"
                     tools:srcCompat="@tools:sample/avatars" />
 
@@ -72,53 +74,55 @@
                     android:text="Nombre"
                     android:textAlignment="center"
                     android:textSize="26sp"
-                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toTopOf="@+id/guideline"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.01" />
 
                 <TextView
                     android:id="@+id/fMunicipioDetail"
-                    android:layout_width="wrap_content"
+                    android:layout_width="170sp"
                     android:layout_height="wrap_content"
                     android:text="Municipio"
+                    android:textAlignment="center"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toTopOf="@+id/guideline"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.216"
+                    app:layout_constraintHorizontal_bias="0.066"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/rSlideDetails"
-                    app:layout_constraintVertical_bias="0.094" />
+                    app:layout_constraintVertical_bias="0.106" />
 
                 <TextView
                     android:id="@+id/fLocalidadDetail"
-                    android:layout_width="wrap_content"
+                    android:layout_width="170sp"
                     android:layout_height="wrap_content"
                     android:text="Localidad"
+                    android:textAlignment="center"
                     android:textSize="20sp"
-                    android:typeface="serif"
                     app:layout_constraintBottom_toTopOf="@+id/guideline"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.588"
+                    app:layout_constraintHorizontal_bias="0.629"
                     app:layout_constraintStart_toEndOf="@+id/fMunicipioDetail"
                     app:layout_constraintTop_toBottomOf="@+id/rSlideDetails"
-                    app:layout_constraintVertical_bias="0.094" />
+                    app:layout_constraintVertical_bias="0.111" />
 
                 <TextView
                     android:id="@+id/fZona"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:layout_marginTop="8dp"
-                    android:textAlignment="center"
+                    android:layout_marginTop="32dp"
                     android:text="Zona"
+                    android:textAlignment="center"
+                    android:textSize="20sp"
                     app:layout_constraintBottom_toTopOf="@+id/guideline"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/rSlideDetails"
-                    app:layout_constraintVertical_bias="0.773"
+                    app:layout_constraintTop_toBottomOf="@+id/fLocalidadDetail"
+                    app:layout_constraintVertical_bias="1.0"
                     app:srcCompat="@android:drawable/ic_dialog_map" />
 
                 <TextView
@@ -130,22 +134,22 @@
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.034"
+                    app:layout_constraintHorizontal_bias="0.032"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/guideline"
-                    app:layout_constraintVertical_bias="0.011" />
+                    app:layout_constraintTop_toBottomOf="@+id/fDias"
+                    app:layout_constraintVertical_bias="0.045" />
 
                 <TextView
                     android:id="@+id/fDescDetail"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
-                    android:layout_marginEnd="30dp"
                     android:layout_marginTop="5dp"
+                    android:layout_marginEnd="30dp"
                     android:layout_marginBottom="5dp"
                     android:text="Descripción"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/fDescDetailTitulo" />
 
                 <TextView
@@ -157,22 +161,22 @@
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.034"
+                    app:layout_constraintHorizontal_bias="0.026"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/fDescDetail"
-                    app:layout_constraintVertical_bias="0.250" />
+                    app:layout_constraintTop_toBottomOf="@+id/guideline"
+                    app:layout_constraintVertical_bias="0.0" />
 
                 <TextView
                     android:id="@+id/fDias"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
-                    android:layout_marginEnd="30dp"
                     android:layout_marginTop="5dp"
+                    android:layout_marginEnd="30dp"
                     android:layout_marginBottom="5dp"
                     android:text="Dias"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/fDiasTitulo" />
 
 
@@ -182,13 +186,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="15dp"
+                    android:layout_marginBottom="40dp"
                     android:layout_marginEnd="15dp"
                     app:cardElevation="0dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/fDias"
+                    app:layout_constraintTop_toBottomOf="@+id/fDescDetail"
                     app:layout_constraintVertical_bias="0">
 
                     <LinearLayout
@@ -200,10 +205,10 @@
                             android:id="@+id/mapImageView"
                             android:layout_width="30dp"
                             android:layout_height="20dp"
+                            android:contentDescription="Coordinates map pic"
                             android:scaleX="1.35"
                             android:scaleY="1.35"
-                            app:srcCompat="@android:drawable/ic_dialog_map"
-                            android:contentDescription="Coordinates map pic" />
+                            app:srcCompat="@android:drawable/ic_dialog_map" />
 
                         <!-- TextView for the coordinates -->
                         <TextView
