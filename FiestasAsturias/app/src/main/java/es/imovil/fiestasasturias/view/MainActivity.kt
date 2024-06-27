@@ -15,6 +15,9 @@ import es.imovil.fiestasasturias.databinding.ActivityMainBinding
 import es.imovil.fiestasasturias.domain.FiestasViewModelFactory
 import es.imovil.fiestasasturias.ui.theme.FiestasAsturiasTheme
 
+/**
+ * Actividad principal, desde aqui se carga el resto de la apliación
+ */
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -26,13 +29,4 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
-    private fun setAppTheme(systemTheme: Boolean, nightMode: Boolean) {
-        if (systemTheme)
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-        else if (nightMode)
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        else
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-    }
-
 }

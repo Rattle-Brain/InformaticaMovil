@@ -8,27 +8,28 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Response
 import java.util.concurrent.TimeUnit
 
 private val JSON_BASE_URL = "http://orion.edv.uniovi.es/~arias/json/"
-private val HOME_URL = "http://192.168.8.104/"
-private val IMG_BASE_URL  = "https://www.turismoasturias.es"
 
+/**
+ * Servicio API Rest para poder obtener las fiestas a través de internet
+ */
 interface RestApiService {
     @GET("FiestasDeInteres.json")
     suspend fun getFiestasFromLink(): Fiestas
 }
-
+// Creamos el moshi
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
     .build()
 
-// Logging interceptor
+// Logger que permite ver si la consulta llega corectamente
 val logging = HttpLoggingInterceptor().apply {
     level = HttpLoggingInterceptor.Level.BODY
 }
 
+// Cliente que utiliza el logger anterior
 val client = OkHttpClient.Builder()
     .addInterceptor(logging)
     .connectTimeout(30, TimeUnit.SECONDS)
@@ -36,12 +37,16 @@ val client = OkHttpClient.Builder()
     .writeTimeout(30, TimeUnit.SECONDS)
     .build()
 
+// Creamos retrofit con el cliente para poder hacer logs de la información
 private val retrofit = Retrofit.Builder()
     .addConverterFactory(MoshiConverterFactory.create(moshi))
     .baseUrl(JSON_BASE_URL)
     .client(client)
     .build()
 
+/**
+ * Api Rest
+ */
 object RestApi {
     val retrofitService: RestApiService by lazy {
         retrofit.create(RestApiService::class.java)

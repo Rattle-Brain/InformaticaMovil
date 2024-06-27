@@ -21,6 +21,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+/**
+ * Fragmento de los detalles de la fiesta. Aqui implementamos la logica
+ */
 class DetailFragment : Fragment() {
 
     private val args: DetailFragmentArgs by navArgs()
@@ -70,13 +73,19 @@ class DetailFragment : Fragment() {
                 fDias.text = fiesta.dias
 
                 try {
+                    // Separamos coordenadas por la , para obtener latitud y longitud
                     val coords = fiesta.coordenadas.split(",")
+                    // Creamos el objeto para la geolocalizacion de la fiesta
                     geoloc = GeoLoc(fiesta.nombre, coords[0].toDouble(), coords[1].toDouble())
+                    // Mostramos las coordenadas en el texto
+                    // Seguramente esta no sea la mejor practica, la verdad
                     fCoordinates.text = fiesta.coordenadas
                 } catch (e: Exception) {
+                    // En caso de error eliminamos las coordenadas de la vista
                     fCoordinates.isVisible = false
                 }
 
+                // Nos lleva al fragmento del mapa cuando clickamos
                 fCoordinates.setOnClickListener {
                     findNavController().navigate(
                         DetailFragmentDirections.actionDetailFragmentToMapFragment(geoloc)
@@ -85,6 +94,7 @@ class DetailFragment : Fragment() {
 
                 rvSlide = rSlideDetails
 
+                // Establecemos que las imágenes se deslicen en horizontal
                 rvSlide.apply {
                     layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                     adapter = ImgSliderAdapter(fiesta.slide.split(","), fiesta.slideTitulo)

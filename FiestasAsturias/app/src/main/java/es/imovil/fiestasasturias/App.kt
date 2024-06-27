@@ -4,7 +4,6 @@ import android.app.Application
 import es.imovil.fiestasasturias.data.FiestaRepository
 import es.imovil.fiestasasturias.model.FiestasDatabase
 
-//val Context.dataStore by preferencesDataStore(name="settings")
 class App: Application() {
 
     val fiestadb by lazy {

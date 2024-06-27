@@ -5,6 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import es.imovil.fiestasasturias.databinding.ImgSlideBinding
 
+/**
+ * Adapter para el slider de fotos en la pantalla de detalles de la fiesta
+ */
 class ImgSliderAdapter(private val slides: List<String>?,
                        private val title: String?
 ) : RecyclerView.Adapter<ImgSliderViewHolder>() {

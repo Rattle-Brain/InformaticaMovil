@@ -27,13 +27,14 @@ import es.imovil.fiestasasturias.domain.FiestasViewModel
 import es.imovil.fiestasasturias.domain.FiestasViewModelFactory
 import es.imovil.fiestasasturias.ui.FiestasUIState
 
+/**
+ * Logica de negocio del fragmento que contiene la lista de fiestas
+ */
 class FiestasListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener,
     ClickListenerController, SearchView.OnQueryTextListener {
 
     private var _binding: FragmentFiestasListBinding? = null
     private val binding get() = _binding!!
-
-    private lateinit var navController: NavController
 
     private val fiestasVM: FiestasViewModel by viewModels {
         FiestasViewModelFactory((requireActivity().application as App).fiestaRepo)
@@ -80,14 +81,18 @@ class FiestasListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener,
         }
     }
 
+    // Observamos los cambios en el viewmodel y enviamos la lista de fiesta para reflejar la
+    // Actualización de la información
     private fun observeViewModel() {
         fiestasVM.fiestasUIStateObservable.observe(viewLifecycleOwner) { result ->
             when (result) {
+                // Si el estado es exitoso paramos de cargar y enviamos la nueva lista de fiestas
                 is FiestasUIState.Success -> {
                     fAdapter.submitList(result.fiestas.fiestas)
                     binding.swipeRefreshLayout.isRefreshing = false
                 }
 
+                // Si es error paramos de cargar y mostramos mensajito con el error
                 is FiestasUIState.Error -> {
                     Snackbar.make(binding.root, result.message, Snackbar.LENGTH_SHORT).show()
                     binding.swipeRefreshLayout.isRefreshing = false
@@ -134,6 +139,9 @@ class FiestasListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener,
         return true
     }
 
+    /**
+     * Clase privada, para limpiar el código del método createToolBar.
+     */
     private inner class MenuProviderImpl : MenuProvider {
         override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
             menuInflater.inflate(R.menu.menu_main_activity, menu)
@@ -147,6 +155,7 @@ class FiestasListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener,
 
         override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
             return when (menuItem.itemId) {
+                // TODO: Menú de ajustes no hace nada
                 R.id.ajustes -> false
                 else -> false
             }

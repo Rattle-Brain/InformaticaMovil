@@ -15,6 +15,9 @@ import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
 
+/**
+ * Fragmento que contiene la logica del mapa en el que se ve la geoloc de la fiesta
+ */
 class MapFragment : Fragment() {
 
     private val args: MapFragmentArgs by navArgs()
@@ -52,6 +55,7 @@ class MapFragment : Fragment() {
         controller.setZoom(16.0)
         controller.setCenter(fiestaGeoPoint)
 
+        // Creamos el marcador (pin) que indica la localización
         marker = Marker(map)
         marker.position = fiestaGeoPoint
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)

@@ -8,7 +8,9 @@ import androidx.lifecycle.switchMap
 import es.imovil.fiestasasturias.data.FiestaRepository
 import es.imovil.fiestasasturias.model.Fiesta
 
-
+/**
+ * Viewmodel de los detalles de una fiesta
+ */
 class FiestasDetailsViewModel(fiestaRepo: FiestaRepository): ViewModel() {
 
     private val nombreFiesta = MutableLiveData<String>()

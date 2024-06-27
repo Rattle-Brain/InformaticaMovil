@@ -16,24 +16,35 @@ import es.imovil.fiestasasturias.ui.FiestasUIState
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
+/**
+ * Viewmodelde la lista de fiestas
+ */
 class FiestasViewModel(val repository: FiestaRepository): ViewModel()
 {
+    // observable para cambiar el estado
     private val _fiestasUIStateObservable = MutableLiveData<FiestasUIState>()
     val fiestasUIStateObservable: LiveData<FiestasUIState> get() = _fiestasUIStateObservable
 
+    // Query para la búsqueda por nombre, municipio o localidad
     val query = MutableLiveData<String>()
     val fiestasFiltradas: MediatorLiveData<List<Fiesta>> = MediatorLiveData()
 
+    // Limitamos las fiestas
     private val fiestasNames: LiveData<List<Fiesta>> = query.switchMap {query ->
         repository.getFiestasListByName(query).asLiveData()
     }
 
 
     init {
+        // Al inicio la query es empty
         query.value = ""
+
+        // Filtramos fiestas si procede
         fiestasFiltradas.addSource(fiestasNames) { list ->
             fiestasFiltradas.value = list
         }
+
+        // Actualizamos la lista de fiestas acorde y emitimos el resultado
         getFiestasList()
     }
 
@@ -56,6 +67,9 @@ class FiestasViewModel(val repository: FiestaRepository): ViewModel()
 
 }
 
+/**
+ * Factoría de viewmodels
+ */
 class FiestasViewModelFactory(private val repository: FiestaRepository) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
 

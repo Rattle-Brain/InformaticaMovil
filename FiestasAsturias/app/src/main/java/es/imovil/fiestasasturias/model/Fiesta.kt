@@ -4,6 +4,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+/**
+ * Entidad fiesta
+ */
 @Entity(tableName = "fiesta_table")
 data class Fiesta (
 @PrimaryKey val nombre: String,

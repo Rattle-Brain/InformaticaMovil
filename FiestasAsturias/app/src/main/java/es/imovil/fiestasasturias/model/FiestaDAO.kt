@@ -5,9 +5,12 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
+
+/**
+ * DAO de la fiesta con las consultas pertinentes a la base de datos.
+ */
 @Dao
 interface FiestaDAO {
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFiesta(fiesta: Fiesta)
 

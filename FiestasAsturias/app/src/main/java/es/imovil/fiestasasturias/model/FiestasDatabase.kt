@@ -10,8 +10,10 @@ import es.imovil.fiestasasturias.network.RestApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.text.Normalizer
 
+/**
+ * Base de datos para almacenar las fiestas con ROOM y SQLite
+ */
 @Database(entities = [Fiesta::class], version = 1)
 abstract class FiestasDatabase: RoomDatabase(){
     abstract fun dao(): FiestaDAO

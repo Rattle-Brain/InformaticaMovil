@@ -1,26 +1,17 @@
 package es.imovil.fiestasasturias.data
 
-import androidx.annotation.OptIn
-import androidx.datastore.core.DataStore
-import androidx.media3.common.util.Log
-import androidx.media3.common.util.UnstableApi
 import es.imovil.fiestasasturias.model.Fiesta
 import es.imovil.fiestasasturias.model.FiestaDAO
 import es.imovil.fiestasasturias.network.RestApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import java.io.IOException
-import java.util.prefs.Preferences
 
-private const val TAG = "REPOSITORY-DEBUG"
-
+/**
+ * Repositorio de las fiestas
+ */
 class FiestaRepository(private val fiestaDAO: FiestaDAO){
 
     fun getFiestaByName(nombreFiesta: String) = fiestaDAO.getFiestaByName(nombreFiesta)
@@ -49,8 +40,7 @@ class FiestaRepository(private val fiestaDAO: FiestaDAO){
 
         flow {
             try {
-                deleteFiestas()
-
+                // Obtenemos la lista de fiestas del servicio red
                 val items = RestApi.retrofitService.getFiestasFromLink()
 
                 items.fiestas.map { insertFiesta(it) }
