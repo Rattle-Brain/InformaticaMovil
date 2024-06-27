@@ -114,28 +114,8 @@ class FiestasListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener,
     }
 
     private fun createToolBar() {
-        val mainActivity: MainActivity = requireActivity() as MainActivity
-        mainActivity.addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menuInflater.inflate(R.menu.menu_main_activity, menu)
-                val mItem: MenuItem? = menu.findItem(R.id.busqueda)
-                val searchView: SearchView = mItem?.actionView as SearchView
-                searchView.setQuery(fiestasVM.query.value, false)
-                searchView.setOnQueryTextListener(this@FiestasListFragment)
-
-            }
-
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                return when (menuItem.itemId) {
-                    R.id.ajustes -> {
-                        NavigationUI.onNavDestinationSelected(menuItem, navController)
-                    }
-
-                    else -> false
-                }
-            }
-        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
-
+        val mainActivity = requireActivity() as MainActivity
+        mainActivity.addMenuProvider(MenuProviderImpl(), viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
     override fun onQueryTextSubmit(p0: String?): Boolean {
@@ -150,5 +130,24 @@ class FiestasListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener,
             fiestasVM.query.value = ""
 
         return true
+    }
+
+    private inner class MenuProviderImpl : MenuProvider {
+        override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+            menuInflater.inflate(R.menu.menu_main_activity, menu)
+            menu.findItem(R.id.busqueda)?.let { menuItem ->
+                (menuItem.actionView as? SearchView)?.apply {
+                    setQuery(fiestasVM.query.value, false)
+                    setOnQueryTextListener(this@FiestasListFragment)
+                }
+            }
+        }
+
+        override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+            return when (menuItem.itemId) {
+                R.id.ajustes -> NavigationUI.onNavDestinationSelected(menuItem, navController)
+                else -> false
+            }
+        }
     }
 }
