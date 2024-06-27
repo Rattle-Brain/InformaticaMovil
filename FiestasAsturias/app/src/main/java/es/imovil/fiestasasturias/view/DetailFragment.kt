@@ -21,22 +21,17 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class DetailFragment: Fragment() {
+class DetailFragment : Fragment() {
 
     private val args: DetailFragmentArgs by navArgs()
-
-    private lateinit var fiestaNombre: String
-
-    private var _binding: FragmentDetailBinding? = null
-    private val binding get() = _binding!!
-
-    private lateinit var rvSlide: RecyclerView
-
-    private lateinit var geoloc: GeoLoc
-
-    private val detailVM: FiestasDetailsViewModel by viewModels() {
+    private val detailVM: FiestasDetailsViewModel by viewModels {
         FiestasViewModelFactory((activity?.application as App).fiestaRepo)
     }
+    private var _binding: FragmentDetailBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var fiestaNombre: String
+    private lateinit var geoloc: GeoLoc
+    private lateinit var rvSlide: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +39,7 @@ class DetailFragment: Fragment() {
             fiestaNombre = args.fNombre
         }
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -51,51 +47,49 @@ class DetailFragment: Fragment() {
         _binding = FragmentDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         detailVM.setFiesta(fiestaNombre)
-
         bindFiestaDetails()
     }
 
-    fun bindFiestaDetails(){
-        detailVM.fiesta.observe(viewLifecycleOwner) { f ->
-            with(binding) {
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
-                fNombreDetail.text = f.nombre
-                fLocalidadDetail.text = f.localidad
-                fMunicipioDetail.text = f.municipio
-                fDescDetail.text = f.descripcion
-                fZona.text = f.zona
-                fDias.text = f.dias
+    private fun bindFiestaDetails() {
+        detailVM.fiesta.observe(viewLifecycleOwner) { fiesta ->
+            binding.apply {
+                fNombreDetail.text = fiesta.nombre
+                fLocalidadDetail.text = fiesta.localidad
+                fMunicipioDetail.text = fiesta.municipio
+                fDescDetail.text = fiesta.descripcion
+                fZona.text = fiesta.zona
+                fDias.text = fiesta.dias
 
                 try {
-                    val cords: List<String> = f.coordenadas.split(",")
-                    geoloc = GeoLoc(f.nombre,cords[0].toDouble(), cords[1].toDouble())
-                    fCoordinates.text = f.coordenadas
-                } catch (_: Exception) {
+                    val coords = fiesta.coordenadas.split(",")
+                    geoloc = GeoLoc(fiesta.nombre, coords[0].toDouble(), coords[1].toDouble())
+                    fCoordinates.text = fiesta.coordenadas
+                } catch (e: Exception) {
                     fCoordinates.isVisible = false
                 }
 
                 fCoordinates.setOnClickListener {
                     findNavController().navigate(
-                        es.imovil.fiestasasturias.view.
-                        DetailFragmentDirections.actionDetailFragmentToMapFragment(geoloc))
+                        DetailFragmentDirections.actionDetailFragmentToMapFragment(geoloc)
+                    )
                 }
-
-                val slides: List<String> = f.slide.split(",")
-                val title = f.slideTitulo
 
                 rvSlide = rSlideDetails
 
-                rvSlide.layoutManager = LinearLayoutManager(context,
-                    androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL,false);
-
-                rvSlide.adapter = ImgSliderAdapter(slides, title)
+                rvSlide.apply {
+                    layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                    adapter = ImgSliderAdapter(fiesta.slide.split(","), fiesta.slideTitulo)
+                }
             }
         }
-
     }
 }
-

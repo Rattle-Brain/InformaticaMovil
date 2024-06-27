@@ -17,7 +17,6 @@ class FiestasDetailsViewModel(fiestaRepo: FiestaRepository): ViewModel() {
             nombre -> fiestaRepo.getFiestaByName(nombre).asLiveData()
     }
 
-    // MÉTODOS
     fun setFiesta(name: String) {
         nombreFiesta.value = name
     }
