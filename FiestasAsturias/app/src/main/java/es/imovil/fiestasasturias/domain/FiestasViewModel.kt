@@ -30,8 +30,6 @@ class FiestasViewModel(val repository: FiestaRepository): ViewModel()
 
 
     init {
-        query.value = ""
-
         fiestasFiltradas.addSource(fiestasNames) { list ->
             fiestasFiltradas.value = list
         }
