@@ -103,11 +103,13 @@ class FiestasListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener,
     }
 
     override fun onRefresh() {
+
         fiestasVM.getFiestasList()
     }
 
     override fun onItemClick(position: Int) {
         val nombreFiesta = fiestasVM.fiestasFiltradas.value?.get(position)?.nombre ?: return
+        fiestasVM.query.value = ""
         findNavController().navigate(
             FiestasListFragmentDirections.actionFiestasFragmentToDetailFragment(nombreFiesta)
         )
