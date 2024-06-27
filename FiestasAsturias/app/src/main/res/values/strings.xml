@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">Fiestas en Asturias</string>
     <string name="imagenes_de_las_fiestas">Imagenes de las fiestas</string>
+    <string name="descripcion_corta">Descripción Corta</string>
+    <string name="municipio">Municipio</string>
+    <string name="localidad">Localidad</string>
+    <string name="nombre_fiesta">Nombre</string>
+    <string name="zona">Zona</string>
+    <string name="titulo_desc_detalle">Descripción</string>
+    <string name="descripcion_detalle">Descripción</string>
+    <string name="titulo_dias_detalle">Días</string>
+    <string name="dias_detalle">Días</string>
+    <string name="coordenadas_texto">Latitud, Longitud</string>
+    <string name="icono_de_mapa">Icono de mapa</string>
 </resources>

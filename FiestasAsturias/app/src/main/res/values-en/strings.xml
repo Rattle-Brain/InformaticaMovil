@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Asturian Festivals</string>
+    <string name="imagenes_de_las_fiestas">Festival\'s Pictures</string>
+    <string name="descripcion_corta">Short Description</string>
+    <string name="municipio">Municipality</string>
+    <string name="localidad">Council</string>
+    <string name="nombre_fiesta">Name</string>
+    <string name="zona">Region</string>
+    <string name="titulo_desc_detalle">Description</string>
+    <string name="descripcion_detalle">Description</string>
+    <string name="titulo_dias_detalle">Days</string>
+    <string name="dias_detalle">Days</string>
+    <string name="coordenadas_texto">Latitude, Longitude</string>
+    <string name="icono_de_mapa">Map Icon</string>
+</resources>

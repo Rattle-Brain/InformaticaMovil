@@ -47,7 +47,7 @@
                 app:layout_constraintStart_toEndOf="@+id/fThumbnail"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.08"
-                tools:text="Nombre" />
+                android:text="@string/nombre_fiesta" />
 
 
             <TextView
@@ -56,13 +56,13 @@
                 android:layout_height="33dp"
                 android:layout_marginStart="4dp"
                 android:textSize="13sp"
+                android:text="@string/localidad"
                 android:textStyle="bold|italic"
                 android:typeface="serif"
                 app:layout_constraintBottom_toTopOf="@+id/fDescCorta"
                 app:layout_constraintStart_toEndOf="@+id/fMunicipio"
                 app:layout_constraintTop_toBottomOf="@+id/fNombre"
-                app:layout_constraintVertical_bias="0.466"
-                tools:text="Localidad" />
+                app:layout_constraintVertical_bias="0.466" />
 
             <TextView
                 android:id="@+id/fMunicipio"
@@ -76,7 +76,7 @@
                 app:layout_constraintStart_toEndOf="@+id/fThumbnail"
                 app:layout_constraintTop_toBottomOf="@+id/fNombre"
                 app:layout_constraintVertical_bias="0.5"
-                tools:text="Municipio" />
+                android:text="@string/municipio" />
 
             <TextView
                 android:id="@+id/fDescCorta"
@@ -87,7 +87,6 @@
                 android:layout_marginEnd="140dp"
                 android:ellipsize="end"
                 android:maxLines="4"
-                android:text=""
                 android:textAlignment="viewStart"
                 android:textSize="11sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -96,7 +95,7 @@
                 app:layout_constraintStart_toEndOf="@+id/fThumbnail"
                 app:layout_constraintTop_toBottomOf="@+id/fNombre"
                 app:layout_constraintVertical_bias="0.444"
-                tools:text="Descripción Corta" />
+                android:text="@string/descripcion_corta" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
