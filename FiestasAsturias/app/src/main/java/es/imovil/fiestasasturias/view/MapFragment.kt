@@ -15,29 +15,25 @@ import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
 
-class MapFragment: Fragment() {
+class MapFragment : Fragment() {
 
-    val args: MapFragmentArgs by navArgs()
+    private val args: MapFragmentArgs by navArgs()
 
     // Binding
     private var _binding: FragmentMapBinding? = null
     private val binding get() = _binding!!
 
-    lateinit var map: MapView
-    lateinit var controller: IMapController
-    lateinit var marker: Marker
-    lateinit var fiestaGeoPoint: GeoPoint
+    private lateinit var map: MapView
+    private lateinit var controller: IMapController
+    private lateinit var marker: Marker
+    private lateinit var fiestaGeoPoint: GeoPoint
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         Configuration.getInstance().load(requireContext(), PreferenceManager.getDefaultSharedPreferences(requireContext()))
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentMapBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -49,12 +45,12 @@ class MapFragment: Fragment() {
         map.setTileSource(TileSourceFactory.DEFAULT_TILE_SOURCE)
         controller = map.controller
 
-        val latitude: Double = args.coordenadas.latitud
-        val longitude: Double = args.coordenadas.longitud
+        val latitude = args.coordenadas.latitud
+        val longitude = args.coordenadas.longitud
 
         fiestaGeoPoint = GeoPoint(latitude, longitude)
-        controller.zoomTo(16,2)
-        controller.animateTo(fiestaGeoPoint)
+        controller.setZoom(16.0)
+        controller.setCenter(fiestaGeoPoint)
 
         marker = Marker(map)
         marker.position = fiestaGeoPoint
@@ -62,5 +58,10 @@ class MapFragment: Fragment() {
         marker.title = args.coordenadas.fNombre
 
         map.overlays.add(marker)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

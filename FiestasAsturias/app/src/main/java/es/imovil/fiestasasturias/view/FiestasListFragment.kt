@@ -145,7 +145,7 @@ class FiestasListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener,
 
         override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
             return when (menuItem.itemId) {
-                R.id.ajustes -> NavigationUI.onNavDestinationSelected(menuItem, navController)
+                R.id.ajustes -> false
                 else -> false
             }
         }
