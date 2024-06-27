@@ -10,6 +10,7 @@ import es.imovil.fiestasasturias.network.RestApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.text.Normalizer
 
 @Database(entities = [Fiesta::class], version = 1)
 abstract class FiestasDatabase: RoomDatabase(){
@@ -44,31 +45,6 @@ abstract class FiestasDatabase: RoomDatabase(){
 
                         val fiestas = RestApi.retrofitService.getFiestasFromLink()
                         fiestas.fiestas.map { INSTANCE!!.dao().insertFiesta(it) }
-
-                        INSTANCE!!.dao().insertFiesta(
-                            Fiesta("Ejemplo",
-                                "Ejemplo",
-                                "Ejemplo",
-                                "Ejemplo",
-                                "Ejemplo",
-                                "Ejemplo",
-                                "Ejemplo",
-                                "Ejemplo",
-                                "Ejemplo",
-                                "Ejemplo",
-                                "Ejemplo",
-                                "Ejemplo",
-                                "Ejemplo",
-                                "Ejemplo",
-                                "Ejemplo",
-                                "Ejemplo",
-                                "Ejemplo",
-                                "Ejemplo",
-                                "Ejemplo",
-                                "Ejemplo",
-                                "Ejemplo",
-                                "Ejemplo")
-                        )
 
                     // If it fails we show a toast indicating so
                     } catch (_: Exception) {

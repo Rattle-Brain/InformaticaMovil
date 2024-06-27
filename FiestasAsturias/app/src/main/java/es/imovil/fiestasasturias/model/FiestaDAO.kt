@@ -22,7 +22,7 @@ interface FiestaDAO {
     @Query("SELECT * FROM fiesta_table WHERE " +
             "Nombre LIKE '%' || :name || '%' OR " +
             "Localidad LIKE '%' || :name || '%' OR " +
-            "Municipio LIKE '%' || :name || '%'")
+            "Municipio LIKE '%' || :name || '%'" )
     fun getFiestasListByName(name: String):Flow<List<Fiesta>>
 
     @Query("SELECT nombre  FROM fiesta_table")
