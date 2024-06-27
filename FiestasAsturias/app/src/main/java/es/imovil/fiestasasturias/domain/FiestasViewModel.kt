@@ -25,17 +25,23 @@ class FiestasViewModel(val repository: FiestaRepository): ViewModel()
     val fiestasFiltradas: MediatorLiveData<List<Fiesta>> = MediatorLiveData()
 
     private val fiestasNames: LiveData<List<Fiesta>> = query.switchMap {query ->
-        val temp: List<String> = query.chunked(1)
-        val exclude: List<String> = listOf("a","e","i","o","u","á","é","í","ó","ú")
-        var name = ""
-        for (c in temp) {
-            name += if(exclude.contains(c)) "_"
-            else c
-        }
+        val normalizedQuery = normalize(query)
 
-        repository.getFiestasListByName(name).asLiveData()
+        repository.getFiestasListByName(normalizedQuery).asLiveData()
     }
 
+    private fun normalize(query: String?): String {
+        val temp: List<String> = query!!.chunked(1)
+        val diacriticVowels: List<String> = listOf("á","é","í","ó","ú")
+        var normalizedQuery = ""
+        for (char in temp) {
+            normalizedQuery += if (char in diacriticVowels)
+                "_"
+            else
+                char
+        }
+        return normalizedQuery
+    }
 
 
     // Inicializacion del viewmodel
