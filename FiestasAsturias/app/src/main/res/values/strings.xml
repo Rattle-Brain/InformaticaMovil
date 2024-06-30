@@ -12,4 +12,7 @@
     <string name="dias_detalle">Días</string>
     <string name="coordenadas_texto">Latitud, Longitud</string>
     <string name="icono_de_mapa">Icono de mapa</string>
+    <string name="oriente_asturias">Oriente Asturias</string>
+    <string name="centro_asturias">Centro Asturias</string>
+    <string name="occidente_asturias">Occidente Asturias</string>
 </resources>

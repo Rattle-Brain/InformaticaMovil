@@ -1,5 +1,6 @@
 package es.imovil.fiestasasturias.model
 
+import androidx.compose.ui.text.toLowerCase
 import androidx.recyclerview.widget.DiffUtil
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -40,5 +41,20 @@ data class Fiesta (
         override fun areContentsTheSame(oldItem: Fiesta, newItem: Fiesta): Boolean {
             return oldItem == newItem
         }
+    }
+
+    fun zonaCentro(): Boolean {
+        val normalizedText = this.zona.toLowerCase()
+        return normalizedText.contains("centro")
+    }
+
+    fun zonaOccidente(): Boolean {
+        val normalizedText = this.zona.toLowerCase()
+        return normalizedText.contains("occidente")
+    }
+
+    fun zonaOriente(): Boolean {
+        val normalizedText = this.zona.toLowerCase()
+        return normalizedText.contains("oriente")
     }
 }
